@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+		<meta name ="viewport" content ="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<title>热们搜索推荐</title>
+        <style>
+		    body {
+				margin:0;
+				padding:0;
+			}
+			.dls {
+				display:none;
+			}
+			.uls {
+				display:none;
+			}
+			#input {
+				width:500px;
+				height:50px;
+				border:2px solid red;
+				font-size:30px;
+			}
+			#lisecond {
+				cursor:pointer;
+			}
+        </style>
+            
+    </head>
+    <body>
+		
+		<input id="input">
+		<dl class = "dls">
+			<dt>热门推荐</dt>
+			<dd>web前端</dd>
+			<dd>移动开发</dd>
+			<dd>服务端渲染</dd>
+		</dl>
+		<ul class="uls">
+		</ul>
+    </body>
+	<script>
+		var input = document.getElementById('input');
+		var dl = document.getElementsByTagName('dl')[0];
+		var ul = document.getElementsByTagName('ul')[0];
+		input.onfocus = function(e){
+			if(!this.value){
+			    dl.style.display = 'block';
+				ul.style.display = 'none';
+			}else{
+				ul.style.display = 'block';
+				dl.style.display = 'none';
+			}
+		}
+		input.onblur = function(e){
+			setTimeout(function(){
+				dl.style.display = 'none';
+				ul.style.display = 'none';
+				console.log('11111111111')
+			},200);
+			
+		}
+		var arr = ['故宫','花故娘','故事','蔡徐坤','a','b','c','花心'];
+		input.oninput = function(e){
+			if(!this.value){
+			    dl.style.display = 'block';
+				ul.style.display = 'none';
+				ul.innerHTML = '';
+			}else{
+				var a = this.value;
+				var r = new RegExp('^'+a);
+				for(var j = 0; j < arr.length; j++) {
+					if(r.test(arr[j])) {
+						var ul2 = document.createElement('ul');
+						ul2.innerHTML = '<li>' + arr[j] + '</li>';
+						ul.appendChild(ul2);
+					}
+				}
+				ul.style.display = 'block';
+				dl.style.display = 'none';
+			}
+		}
+		
+		// document.getElementById('lisecond').onclick = function(e){
+		// 	console.log(e.target,'66666666666666')
+		// }
+	</script>
+</html>
